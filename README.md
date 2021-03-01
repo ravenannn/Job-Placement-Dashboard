@@ -329,7 +329,7 @@ The pop up looped through our database and displayed various information about t
 <div class="sponsor-index--row">
   <div class="col-12 col-md-6 col-lg-4 mb-4">
     <div class="sponsor-index--card">
-	<a href="@item.Link" target="_blank"><img src="@Url.Action("DisplayPhoto", "Photo", new { id = item.PhotoId})" class="medium_size" title="@Html.DisplayFor(modelItem => 	   item.Name)" alt="Sponsor Logo Image" /></a>
+	<a href="@item.Link" target="_blank"><img src="@Url.Action("DisplayPhoto", "Photo", new { id = item.PhotoId})" class="medium_size" title="@Html.DisplayFor(modelItem => item.Name)" alt="Sponsor Logo Image" /></a>
 	<div class="sponsor-index--card-body">
 	    <div class="sponsor-index--card-text">
 		<button class="sponsor-index--iconBtnMini" onclick="window.location.href ='@Url.Action("Edit", "Sponsors", new { id = item.SponsorId })'">
@@ -342,7 +342,7 @@ The pop up looped through our database and displayed various information about t
 		    <span class="sponsor-index--PopUpText">
 			<span class="sponsor-index--details">
 			    <strong>Name:</strong><br /> @Html.DisplayFor(modelItem => item.Name)<br />
-			    <strong>Dimensions</strong><br /> @Html.DisplayFor(modelItem => item.Photo.OriginalWidth) x @Html.DisplayFor(modelItem => item.Photo.OriginalHeight) 				(Width x Height)<br />
+			    <strong>Dimensions</strong><br /> @Html.DisplayFor(modelItem => item.Photo.OriginalWidth) x @Html.DisplayFor(modelItem => item.Photo.OriginalHeight (Width x Height)<br />
 			    <strong>Link:</strong><br /> <a href="@item.Link" target="_blank">@Html.DisplayFor(modelItem => item.Link)</a>
 			</span>
 		    </span>
