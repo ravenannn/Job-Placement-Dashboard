@@ -1,9 +1,9 @@
-# Live Project
+# Internship Projects
 ## Python
 
 ### Introduction
 
-While at the Tech Academy, I spent two weeks working with a team of my peers on a large web application
+I spent two weeks working as part of a development team on a large web application
 built utilizing Django. Working on the project resulted in many [back-end](#back-end-stories) stories that I am proud of. I 
 completed many stories of varying degrees of difficulty during my time on this project. Although the project
 consisted largely of Python, I was also able to utilize my [front-end](#front-end-stories) skills with HTML, CSS, and JavaScript.
@@ -248,6 +248,186 @@ button[type="button"]:hover {
 }
 ```
 
+*Jump to: [Front End Stories](#front-end-stories), [Back End Stories](#back-end-stories), [Other Skills](#other-skills-learned), [Page Top](#live-project)*
+
+
+## MVC/MVVM Project
+
+### Introduction
+
+As a member of a development team, I worked on a full scale MVC/MVVM Web Application in C#, jQuery, CSS, HTML, and more. Working on a legacy codebase was a great learning opportunity for fixing bugs, refactoring code, and adding requested features. There were big changes that could have de-railed our timeline, but by utilizing Scrum and Azure DevOps, we were able to deliver time. I was able to prove that through research and collaboration, I could meet the client's needs. I worked on several back end stories that I am very proud of. Because much of the site had already been built, there were also a good deal of front end stories and UX improvements that needed to be completed, all of varying degrees of difficulty. 
+
+Below are descriptions of the stories I worked on, along with code snippets and navigation links. 
+
+
+### Back End Stories
+---
+
+* [Search Functionality](#search-functionality)
+* [Animations](#animations)
+* [Pop Up](#pop-up)
+* [Styling](#styling)
+
+
+#### Search Functionality
+
+I was tasked with creating a search bar that would filter through sponsors for a theater company.
+
+```
+  // Filter table values based off text in search bar, refresh button undoes filter
+    $(document).ready(function () {
+        $("#searchFilter").on("keyup", function () {
+            var searchText = $(this).val().toLowerCase();
+            $("#sponsor-search .sponsor-index--row").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1)
+            });
+        });
+        $('#clearSearch').click(function () {
+            $("#searchFilter").val("");
+            $("#searchFilter").trigger("keyup")
+        });
+    });
+ 
+ ```
+ 
+#### Animations
+ 
+I utilized jQuery to create a slide-out panel to display edit and delete buttons as well as a details button upon mouseover of a sponsor logo.
+
+```
+    //slide out icons from bottom of cards on hover
+    $('.sponsor-index--card').on('mouseenter', function () {
+        $(this).find('.sponsor-index--card-text').slideDown(300);
+    });
+    //slide icons back up under bottom of cards when cursor no longer hovers
+    $('.sponsor-index--card').on('mouseleave', function (event) {
+        $(this).find('.sponsor-index--card-text').css({
+            'display': 'none'
+        });
+    });
+    
+```
+
+#### Pop Up
+
+Upon clicking the details icon, a pop-up would appear.
+
+```
+    //Pop up for details icon
+    function sponsorPop(div) {
+    var popup = div.querySelector(".sponsor-index--PopUpText");
+    if (popup) {
+        popup.classList.toggle("show");
+    }
+}
+
+```
+
+The pop up looped through our database and displayed various information about the theater company's sponsors.
+
+```
+<div class="sponsor-index--row">
+  <div class="col-12 col-md-6 col-lg-4 mb-4">
+    <div class="sponsor-index--card">
+	<a href="@item.Link" target="_blank"><img src="@Url.Action("DisplayPhoto", "Photo", new { id = item.PhotoId})" class="medium_size" title="@Html.DisplayFor(modelItem => 	   item.Name)" alt="Sponsor Logo Image" /></a>
+	<div class="sponsor-index--card-body">
+	    <div class="sponsor-index--card-text">
+		<button class="sponsor-index--iconBtnMini" onclick="window.location.href ='@Url.Action("Edit", "Sponsors", new { id = item.SponsorId })'">
+		    <i class="fa fa-edit fa-2x"></i>
+		</button>
+		<div class="sponsor-index--PopUp" onclick="sponsorPop(this)">
+		    <button class="sponsor-index--iconBtnMini">
+			<i class="fa fa-info-circle fa-2x"></i>
+		    </button>
+		    <span class="sponsor-index--PopUpText">
+			<span class="sponsor-index--details">
+			    <strong>Name:</strong><br /> @Html.DisplayFor(modelItem => item.Name)<br />
+			    <strong>Dimensions</strong><br /> @Html.DisplayFor(modelItem => item.Photo.OriginalWidth) x @Html.DisplayFor(modelItem => item.Photo.OriginalHeight) 				(Width x Height)<br />
+			    <strong>Link:</strong><br /> <a href="@item.Link" target="_blank">@Html.DisplayFor(modelItem => item.Link)</a>
+			</span>
+		    </span>
+		</div>
+		<button class="sponsor-index--iconBtnDelete" id="iconBtnDelete" onclick="window.location.href ='@Url.Action("Delete", "Sponsors", new { id = item.SponsorId })'">
+		    <i class="fa fa-trash-alt fa-2x"></i>
+		</button>
+	    </div>
+
+```
+
+#### Styling
+
+I utilized CSS to style the pop up.
+
+```
+/* Popup container */
+.sponsor-index--PopUp {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.sponsor-index--PopUp .sponsor-index--PopUpText {
+    visibility: hidden;
+    width: 160px;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI 		Symbol", "Noto Color Emoji";
+    text-align: left;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/*Popup arrow */
+.sponsor-index--PopUp .sponsor-index--PopUpText::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--light-color) transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.sponsor-index--PopUp .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+/*@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}*/
+
+/* =========== END SPONSOR INDEX PAGE DETAILS POPUP */
+
+```
+
 ### Other Skills Learned
 * How to work on a team amongst other developers
 * Collaborative problem solving
@@ -255,4 +435,5 @@ button[type="button"]:hover {
 * How to navigate Azure DevOps
 * Version Control
 
-*Jump to: [Front End Stories](#front-end-stories), [Back End Stories](#back-end-stories), [Other Skills](#other-skills-learned), [Page Top](#live-project)*
+
+*Jump to: [Python Project](#python-project), [Page Top](#live-project)*
