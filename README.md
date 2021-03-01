@@ -1,5 +1,5 @@
 # Internship Projects
-## Python
+## Python Project
 
 ### Introduction
 
@@ -248,7 +248,7 @@ button[type="button"]:hover {
 }
 ```
 
-*Jump to: [Front End Stories](#front-end-stories), [Back End Stories](#back-end-stories), [Other Skills](#other-skills-learned), [Page Top](#live-project)*
+*Jump to: [Front End Stories](#front-end-stories), [Back End Stories](#back-end-stories), [Other Skills](#other-skills-learned), [Page Top](#internship-projects)*
 
 
 ## MVC/MVVM Project
@@ -427,6 +427,7 @@ I utilized CSS to style the pop up.
 /* =========== END SPONSOR INDEX PAGE DETAILS POPUP */
 
 ```
+---
 
 ### Other Skills Learned
 * How to work on a team amongst other developers
@@ -436,4 +437,4 @@ I utilized CSS to style the pop up.
 * Version Control
 
 
-*Jump to: [Python Project](#python-project), [Page Top](#live-project)*
+*Jump to: [Python Project](#python-project), [Page Top](#internship-projects)*
